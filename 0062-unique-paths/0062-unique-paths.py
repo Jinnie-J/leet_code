@@ -19,7 +19,6 @@ class Solution:
                     if 0<=nx<m and 0<=ny<n:
                         dp[i][j] += dp[nx][ny]
                 
-        print(dp)
         return dp[m-1][n-1]
                     
                 
