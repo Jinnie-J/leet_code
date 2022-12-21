@@ -1,25 +1,20 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
         
-        #226 => (2,26) (22,6) (2,2,6)
-        
-        dp= [0] * len(s)
-        if s[0] != '0':
-            dp[0]=1
-        
-        for i in range(1,len(s)):
-            x = int(s[i])
-            y = int(s[i-1:i+1])
-            
-            if 1<=x<=9:
-                dp[i] += dp[i-1]
-            
-            if 10<= y <= 26:
-                if i-2>=0:
-                    dp[i] += dp[i-2]
-                else:
-                    dp[i] += 1
+        if not s or s[0]=='0':
+            return 0
+
+        dp = [0 for x in range(len(s) + 1)] 
+
+        dp[0:2] = [1,1]
+
+        for i in range(2, len(s) + 1): 
+    
+            if 0 < int(s[i-1:i]): 
+                dp[i] = dp[i - 1]
+                
+    
+            if 10 <= int(s[i-2:i]) <= 26: 
+                dp[i] += dp[i - 2]
+                
         return dp[-1]
-            
-        
-        
