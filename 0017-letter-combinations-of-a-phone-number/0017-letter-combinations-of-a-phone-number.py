@@ -5,19 +5,18 @@ class Solution:
         d= {'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'
         }
         
-        if not digits:
-            return []
+        result = []
         
-        digits_arr=list(digits)
+        def make_combinations(i, cur):
+            if i == len(digits):
+                if len(cur) > 0:
+                    result.append(''.join(cur))
+                return
+            for ch in d[digits[i]]:
+                cur.append(ch)
+                make_combinations(i+1, cur)
+                cur.pop()
         
-        answer_arr=[]
-        for digits in digits_arr:
-            answer_arr.append(d[digits])
+        make_combinations(0, [])
         
-        result = list(product(*answer_arr))
-        answer= []
-        for item in result:
-            answer.append(''.join(item))
-        
-        return answer
-        
+        return result
