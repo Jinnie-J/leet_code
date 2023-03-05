@@ -11,11 +11,14 @@ class Solution:
                     cnt += 1
         return cnt
 
-    def dfs(self, grid, i, j):
-        if i<0 or j<0 or i>=len(grid) or j>=len(grid[0]) or grid[i][j] != '1':
-            return
-        grid[i][j] = '0'
-        self.dfs(grid, i+1, j)
-        self.dfs(grid, i-1, j)
-        self.dfs(grid, i, j+1)
-        self.dfs(grid, i, j-1)
+        
+    def dfs(self, grid, x, y):
+        dx=[1,0,-1,0]
+        dy=[0,1,0,-1]
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0<= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == '1':
+                grid[nx][ny]='0'
+                self.dfs(grid,nx,ny)
+        
