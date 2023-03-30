@@ -2,21 +2,20 @@ from itertools import product
 
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        d= {'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'
-        }
+        d= {'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
         
         result = []
         
-        def make_combinations(i, cur):
-            if i == len(digits):
+        def combi(index, cur):
+            if index == len(digits):
                 if len(cur) > 0:
                     result.append(''.join(cur))
                 return
-            for ch in d[digits[i]]:
+            for ch in d[digits[index]]:
                 cur.append(ch)
-                make_combinations(i+1, cur)
+                combi(index+1, cur)
                 cur.pop()
         
-        make_combinations(0, [])
+        combi(0, [])
         
         return result
